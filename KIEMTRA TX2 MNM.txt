@@ -1,0 +1,1324 @@
+KIEMTRA TX2 MNM
+DE1:(Cho đoạn lệnh sau:
+A = np.array([(1,2), (3,4)))
+B = np.array([5,6])
+A1 = np.linalg.inv (A) # tạo ma trận nghịch đảo
+print (A)
+print (B)
+print (A1)
+X = np.dot (A1, B)
+print('Nghiem cua he:',X)
+Hãy đọc đoạn lệnh trên. Sau đó hãy viết 1 chương trình sử dụng đoạn lệnh trên và thêm 3 chức năng vào chương trình đó (Hãy nghĩ thêm chức năng giúp tôi))
+GIAI:
+import numpy as np
+import matplotlib.pyplot as plt
+from tkinter import Tk, Button, Label, Text, END, messagebox
+
+
+# Tạo hàm chính để thực hiện từng chức năng
+def calculate_determinant():
+    det = np.linalg.det(A)
+    output_text.insert(END, f"Định thức của A: {det}\n")
+    if det == 0:
+        messagebox.showwarning("Thông báo", "Ma trận A không khả nghịch!")
+
+
+def calculate_inverse():
+    if np.linalg.det(A) == 0:
+        messagebox.showwarning("Thông báo", "Không thể tính nghịch đảo vì A không khả nghịch!")
+    else:
+        inverse = np.linalg.inv(A)
+        output_text.insert(END, f"Ma trận nghịch đảo của A:\n{inverse}\n")
+
+
+def solve_equations():
+    if np.linalg.det(A) == 0:
+        messagebox.showwarning("Thông báo", "Không thể giải hệ phương trình vì A không khả nghịch!")
+    else:
+        solution = np.linalg.solve(A, B)
+        output_text.insert(END, f"Nghiệm của hệ phương trình: {solution}\n")
+
+
+def plot_solution():
+    if np.linalg.det(A) == 0:
+        messagebox.showwarning("Thông báo", "Không thể vẽ đồ thị nghiệm vì A không khả nghịch!")
+    else:
+        solution = np.linalg.solve(A, B)
+        plt.figure(figsize=(6, 4))
+        plt.bar(['X1', 'X2'], solution, color=['blue', 'orange'], alpha=0.7)
+        plt.title("Đồ thị nghiệm của hệ phương trình")
+        plt.xlabel("Biến số")
+        plt.ylabel("Giá trị nghiệm")
+        plt.grid(True, axis='y', linestyle='--', alpha=0.6)
+        plt.show()
+
+
+def calculate_norm():
+    norm = np.linalg.norm(A)
+    output_text.insert(END, f"Chuẩn (norm) của A: {norm}\n")
+
+
+def show_transpose():
+    transpose = A.T
+    output_text.insert(END, f"Ma trận chuyển vị của A:\n{transpose}\n")
+
+
+# Tạo giao diện GUI
+root = Tk()
+root.title("Giải hệ phương trình tuyến tính")
+root.geometry("600x500")
+
+# Khởi tạo ma trận A và vector B
+A = np.array([[1, 2], [3, 4]])
+B = np.array([5, 6])
+
+# Tiêu đề
+Label(root, text="Giải Hệ Phương Trình Tuyến Tính", font=("Arial", 16)).pack(pady=10)
+
+# Các nút chức năng
+Button(root, text="Tính định thức", command=calculate_determinant, width=20).pack(pady=5)
+Button(root, text="Tính ma trận nghịch đảo", command=calculate_inverse, width=20).pack(pady=5)
+Button(root, text="Giải hệ phương trình", command=solve_equations, width=20).pack(pady=5)
+Button(root, text="Vẽ đồ thị nghiệm", command=plot_solution, width=20).pack(pady=5)
+Button(root, text="Tính chuẩn ma trận", command=calculate_norm, width=20).pack(pady=5)
+Button(root, text="Hiển thị chuyển vị", command=show_transpose, width=20).pack(pady=5)
+
+# Vùng hiển thị kết quả
+Label(root, text="Kết quả:", font=("Arial", 14)).pack(pady=10)
+output_text = Text(root, height=10, width=70)
+output_text.pack()
+
+# Chạy ứng dụng
+root.mainloop()
+
+DE2:
+print("Maximum of 4,12,43.3,19 and 100 is: ",end="")
+print (max(4,12,43.3,19,100 ) )
+print("Minimum of 4,12,43.3,19 and 100 is: ",end="")
+print (min(4,12,43.3,19,100))
+listl = ['java', 'python', 'c++', 'php', 'sql']
+list2 = [4, 2, 8, 10, 6]
+listl.sort()
+list2.sort()
+print ("List1 duoc sap xep: ", listl)
+print ("List2 duoc sap xep: ", list2)
+GIAI:
+import tkinter as tk
+from tkinter import messagebox
+from tkinter import simpledialog
+
+# Dữ liệu ban đầu
+list1 = ['java', 'python', 'c++', 'php', 'sql']
+list2 = [4, 2, 8, 10, 6]
+
+# Hàm tìm max và min
+def find_max():
+    max_val = max(4, 12, 43.3, 19, 100)
+    output_var.set(f"Giá trị lớn nhất: {max_val}")
+
+def find_min():
+    min_val = min(4, 12, 43.3, 19, 100)
+    output_var.set(f"Giá trị nhỏ nhất: {min_val}")
+
+# Hàm sắp xếp theo thứ tự tăng dần hoặc giảm dần
+def sort_lists(order="ascending"):
+    if order == "ascending":
+        list1.sort()
+        list2.sort()
+        output_var.set(f"Sắp xếp tăng dần:\nList1: {list1}\nList2: {list2}")
+    elif order == "descending":
+        list1.sort(reverse=True)
+        list2.sort(reverse=True)
+        output_var.set(f"Sắp xếp giảm dần:\nList1: {list1}\nList2: {list2}")
+
+# Hàm thêm phần tử vào danh sách
+def add_to_list():
+    selected_list = simpledialog.askstring("Thêm phần tử", "Danh sách nào? (list1 hoặc list2):")
+    if selected_list == "list1":
+        element = simpledialog.askstring("Thêm phần tử", "Nhập phần tử cần thêm:")
+        if element:
+            list1.append(element)
+            output_var.set(f"List1 sau khi thêm: {list1}")
+    elif selected_list == "list2":
+        try:
+            element = int(simpledialog.askstring("Thêm phần tử", "Nhập phần tử cần thêm (số):"))
+            list2.append(element)
+            output_var.set(f"List2 sau khi thêm: {list2}")
+        except ValueError:
+            messagebox.showerror("Lỗi", "Vui lòng nhập một số hợp lệ!")
+    else:
+        messagebox.showerror("Lỗi", "Danh sách không hợp lệ!")
+
+# Hàm xóa phần tử khỏi danh sách
+def remove_from_list():
+    selected_list = simpledialog.askstring("Xóa phần tử", "Danh sách nào? (list1 hoặc list2):")
+    if selected_list == "list1":
+        element = simpledialog.askstring("Xóa phần tử", "Nhập phần tử cần xóa:")
+        if element in list1:
+            list1.remove(element)
+            output_var.set(f"List1 sau khi xóa: {list1}")
+        else:
+            messagebox.showerror("Lỗi", "Phần tử không tồn tại trong List1!")
+    elif selected_list == "list2":
+        try:
+            element = int(simpledialog.askstring("Xóa phần tử", "Nhập phần tử cần xóa (số):"))
+            if element in list2:
+                list2.remove(element)
+                output_var.set(f"List2 sau khi xóa: {list2}")
+            else:
+                messagebox.showerror("Lỗi", "Phần tử không tồn tại trong List2!")
+        except ValueError:
+            messagebox.showerror("Lỗi", "Vui lòng nhập một số hợp lệ!")
+    else:
+        messagebox.showerror("Lỗi", "Danh sách không hợp lệ!")
+
+# Hàm tìm phần tử trong danh sách
+def find_element():
+    selected_list = simpledialog.askstring("Tìm phần tử", "Danh sách nào? (list1 hoặc list2):")
+    if selected_list == "list1":
+        element = simpledialog.askstring("Tìm phần tử", "Nhập phần tử cần tìm:")
+        if element in list1:
+            output_var.set(f"'{element}' tồn tại trong List1.")
+        else:
+            output_var.set(f"'{element}' không có trong List1.")
+    elif selected_list == "list2":
+        try:
+            element = int(simpledialog.askstring("Tìm phần tử", "Nhập phần tử cần tìm (số):"))
+            if element in list2:
+                output_var.set(f"{element} tồn tại trong List2.")
+            else:
+                output_var.set(f"{element} không có trong List2.")
+        except ValueError:
+            messagebox.showerror("Lỗi", "Vui lòng nhập một số hợp lệ!")
+    else:
+        messagebox.showerror("Lỗi", "Danh sách không hợp lệ!")
+
+# Hàm đếm số phần tử trong danh sách
+def count_elements():
+    selected_list = simpledialog.askstring("Đếm phần tử", "Danh sách nào? (list1 hoặc list2):")
+    if selected_list == "list1":
+        count = len(list1)
+        output_var.set(f"Số phần tử trong List1: {count}")
+    elif selected_list == "list2":
+        count = len(list2)
+        output_var.set(f"Số phần tử trong List2: {count}")
+    else:
+        messagebox.showerror("Lỗi", "Danh sách không hợp lệ!")
+
+# Hàm xóa tất cả các phần tử trong danh sách
+def clear_list():
+    selected_list = simpledialog.askstring("Xóa tất cả", "Danh sách nào? (list1 hoặc list2):")
+    if selected_list == "list1":
+        list1.clear()
+        output_var.set(f"List1 đã được xóa tất cả các phần tử.")
+    elif selected_list == "list2":
+        list2.clear()
+        output_var.set(f"List2 đã được xóa tất cả các phần tử.")
+    else:
+        messagebox.showerror("Lỗi", "Danh sách không hợp lệ!")
+
+# Hàm lưu danh sách vào file
+def save_to_file():
+    try:
+        with open("lists.txt", "w") as file:
+            file.write(f"List1: {list1}\n")
+            file.write(f"List2: {list2}\n")
+        output_var.set("Danh sách đã được lưu vào file lists.txt")
+    except Exception as e:
+        messagebox.showerror("Lỗi", f"Lỗi khi lưu danh sách: {e}")
+
+# Giao diện chính
+root = tk.Tk()
+root.title("Quản lý danh sách")
+root.geometry("400x600")
+root.resizable(False, False)
+
+# Các biến hiển thị
+output_var = tk.StringVar(value="Kết quả sẽ hiển thị ở đây.")
+
+# Khung hiển thị danh sách
+frame_lists = tk.Frame(root)
+frame_lists.pack(pady=10)
+
+list1_var = tk.StringVar(value=f"List1: {list1}")
+list2_var = tk.StringVar(value=f"List2: {list2}")
+
+tk.Label(frame_lists, textvariable=list1_var).pack()
+tk.Label(frame_lists, textvariable=list2_var).pack()
+
+# Khung chứa các nút
+frame_buttons = tk.Frame(root)
+frame_buttons.pack(pady=10)
+
+tk.Button(frame_buttons, text="Tìm Max", width=15, command=find_max).grid(row=0, column=0, padx=5, pady=5)
+tk.Button(frame_buttons, text="Tìm Min", width=15, command=find_min).grid(row=0, column=1, padx=5, pady=5)
+tk.Button(frame_buttons, text="Sắp xếp tăng", width=15, command=lambda: sort_lists("ascending")).grid(row=1, column=0, padx=5, pady=5)
+tk.Button(frame_buttons, text="Sắp xếp giảm", width=15, command=lambda: sort_lists("descending")).grid(row=1, column=1, padx=5, pady=5)
+tk.Button(frame_buttons, text="Thêm phần tử", width=15, command=add_to_list).grid(row=2, column=0, padx=5, pady=5)
+tk.Button(frame_buttons, text="Xóa phần tử", width=15, command=remove_from_list).grid(row=2, column=1, padx=5, pady=5)
+tk.Button(frame_buttons, text="Tìm phần tử", width=15, command=find_element).grid(row=3, column=0, padx=5, pady=5)
+tk.Button(frame_buttons, text="Đếm phần tử", width=15, command=count_elements).grid(row=3, column=1, padx=5, pady=5)
+tk.Button(frame_buttons, text="Xóa tất cả phần tử", width=15, command=clear_list).grid(row=4, column=0, padx=5, pady=5)
+tk.Button(frame_buttons, text="Lưu danh sách", width=15, command=save_to_file).grid(row=4, column=1, padx=5, pady=5)
+
+# Khung hiển thị kết quả
+frame_output = tk.Frame(root)
+frame_output.pack(pady=10, fill="x")
+
+tk.Label(frame_output, text="Kết quả:", font=("Arial", 12, "bold")).pack(anchor="w", padx=10)
+tk.Label(frame_output, textvariable=output_var, wraplength=380, justify="left", bg="#f0f0f0", relief="sunken").pack(padx=10, pady=5, fill="x")
+
+root.mainloop()
+
+
+Mã đề 3:
+df = pd.read_csv('diemPython.csv', index_col = 0, header = 0)
+in_data = array(df.iloc[:,:])
+print(in_data)
+diemA = in data[:,3]
+diemBc = in_data[:,4]
+print('Tong sv:',tongsv)
+maxa = diemA.max()
+i, = np.where(diemA == maxa)
+print('lop co nhieu diem A la {0} co {1} sv dat diem A'.format(in_data[1,0],maxa))
+plt.plot(range(len(diemA)), diemA, 'r-', label="Diem A")
+plt.plot(range(len(diemBc)), diemBc,'g-', label="Diem B +")
+plt.xlabel('Lop')
+plt.ylabel('So sv dat diem')
+plt.legend(loc='upper right')
+plt.show()
+
+GIAI:
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from tkinter import Tk, Label, Button, filedialog, ttk, Entry, Frame
+from tkinter.messagebox import showinfo
+
+
+# Function to load data
+def load_data():
+  global df, class_filter
+  filepath = filedialog.askopenfilename(filetypes=[("CSV files", "*.csv")])
+  if filepath:
+    try:
+      df = pd.read_csv(filepath, index_col=0, header=0)
+      showinfo("Thành công", "Dữ liệu đã được tải thành công!")
+      update_class_filter()
+    except Exception as e:
+      showinfo("Lỗi", f"Không thể tải dữ liệu: {e}")
+
+
+def update_class_filter():
+  global df
+  if df is not None:
+    classes = df.iloc[:, 0].unique()  # Assuming class information is in the first column
+    class_filter["values"] = ["Tất cả"] + list(classes)
+    class_filter.current(0)
+
+
+# Function to plot data
+def plot_data():
+  if df is None:
+    showinfo("Lỗi", "Vui lòng tải dữ liệu trước!")
+    return
+
+  selected_class = class_filter.get()
+  filtered_df = df
+
+  if selected_class != "Tất cả":
+    filtered_df = df[df.iloc[:, 0] == selected_class]
+
+  in_data = np.array(filtered_df.iloc[:, :])
+  diemA = in_data[:, 2]
+  diemBc = in_data[:, 3]
+
+  plt.plot(range(len(diemA)), diemA, 'r-', label="Điểm 9-10 (A)")
+  plt.plot(range(len(diemBc)), diemBc, 'g-', label="Điểm 1-8 (B)")
+  plt.xlabel('Lớp')
+  plt.ylabel('Số sinh viên đạt điểm')
+  plt.legend(loc='upper right')
+  plt.title(f"Điểm cho {'Tất cả các lớp' if selected_class == 'Tất cả' else selected_class}")
+  plt.show()
+
+
+# Function to save filtered data
+def save_filtered_data():
+  if df is None:
+    showinfo("Lỗi", "Vui lòng tải dữ liệu trước!")
+    return
+
+  selected_class = class_filter.get()
+  filtered_df = df
+
+  if selected_class != "Tất cả":
+    filtered_df = df[df.iloc[:, 0] == selected_class]
+
+  save_path = filedialog.asksaveasfilename(defaultextension=".csv", filetypes=[("CSV files", "*.csv")])
+  if save_path:
+    try:
+      filtered_df.to_csv(save_path)
+      showinfo("Thành công", "Dữ liệu đã được lưu thành công!")
+    except Exception as e:
+      showinfo("Lỗi", f"Không thể lưu dữ liệu: {e}")
+
+
+# Function to calculate total students per class and overall
+def calculate_totals():
+  if df is None:
+    showinfo("Lỗi", "Vui lòng tải dữ liệu trước!")
+    return
+
+  selected_class = class_filter.get()
+
+  if selected_class == "Tất cả":
+    total_students = len(df)
+    total_A = len(df[(df.iloc[:, 2] >= 9) & (df.iloc[:, 2] <= 10)])  # Điểm 9-10 (A)
+    total_Bplus = len(df[(df.iloc[:, 2] >= 1) & (df.iloc[:, 2] <= 8)])  # Điểm 1-8 (B)
+    result_label.config(text=f"Tổng số sinh viên ở tất cả các lớp: {total_students}\n"
+                             f"Tổng số sinh viên đạt điểm 9-10 (A): {total_A}\nTổng số sinh viên đạt điểm 1-8 (B): {total_Bplus}")
+  else:
+    # Filter by selected class
+    filtered_df = df[df.iloc[:, 0] == selected_class]
+    total_students = len(filtered_df)
+    total_A = len(filtered_df[(filtered_df.iloc[:, 2] >= 9) & (filtered_df.iloc[:, 2] <= 10)])
+    total_Bplus = len(filtered_df[(filtered_df.iloc[:, 2] >= 1) & (filtered_df.iloc[:, 2] <= 8)])
+    result_label.config(text=f"Tổng số sinh viên ở lớp {selected_class}: {total_students}\n"
+                             f"Tổng số sinh viên đạt điểm 9-10 (A): {total_A}\nTổng số sinh viên đạt điểm 1-8 (B): {total_Bplus}")
+
+
+# Function to find and display the top student
+def find_top_student():
+  if df is None:
+    showinfo("Lỗi", "Vui lòng tải dữ liệu trước!")
+    return
+
+  # Find the student with the highest score
+  top_student_df = df[df.iloc[:, 2] == df.iloc[:, 2].max()]  # Find the student with the highest score (Điểm A: 9-10)
+
+  if not top_student_df.empty:
+    top_student_name = top_student_df.iloc[0, 0]  # Assuming the student's name is in the first column
+    top_student_score = top_student_df.iloc[0, 2]  # Assuming score is in the 3rd column
+    result_label.config(text=f"Sinh viên có điểm cao nhất là: {top_student_name}\nĐiểm: {top_student_score}")
+  else:
+    result_label.config(text="Không tìm thấy sinh viên với điểm cao nhất.")
+
+
+# Function to find students by a specific score
+def find_students_by_score():
+  if df is None:
+    showinfo("Lỗi", "Vui lòng tải dữ liệu trước!")
+    return
+
+  try:
+    target_score = float(score_input.get())
+    filtered_students = df[df.iloc[:, 2] == target_score]
+
+    if not filtered_students.empty:
+      student_names = "\n".join(filtered_students.iloc[:, 0])
+      result_label.config(text=f"Sinh viên có điểm {target_score}:\n{student_names}")
+    else:
+      result_label.config(text=f"Không có sinh viên nào đạt điểm {target_score}.")
+  except ValueError:
+    showinfo("Lỗi", "Vui lòng nhập một số điểm hợp lệ!")
+
+
+# Function to find the highest score per class and display students
+def find_highest_scores_per_class():
+  if df is None:
+    showinfo("Lỗi", "Vui lòng tải dữ liệu trước!")
+    return
+
+  result = []
+  classes = df.iloc[:, 0].unique()  # Lấy danh sách lớp
+
+  for class_name in classes:
+    class_df = df[df.iloc[:, 0] == class_name]  # Lọc dữ liệu theo lớp
+    max_score = class_df.iloc[:, 2].max()  # Tìm điểm cao nhất
+    top_students = class_df[class_df.iloc[:, 2] == max_score]  # Lọc sinh viên đạt điểm cao nhất
+    student_names = ", ".join(top_students.iloc[:, 1])  # Lấy danh sách tên sinh viên
+
+    result.append(f"Lớp {class_name}:\n- Điểm cao nhất: {max_score}\n- Sinh viên: {student_names}")
+
+  result_label.config(text="\n\n".join(result))
+
+
+# Function to calculate total score and average score per class and overall
+def calculate_total_and_average():
+  if df is None:
+    showinfo("Lỗi", "Vui lòng tải dữ liệu trước!")
+    return
+
+  selected_class = class_filter.get()
+  result = ""
+
+  if selected_class == "Tất cả":
+    total_score = df.iloc[:, 2].sum()  # Tổng điểm
+    average_score = df.iloc[:, 2].mean()  # Điểm trung bình
+    result = f"Tổng điểm tất cả sinh viên: {total_score}\nĐiểm trung bình: {average_score:.2f}"
+  else:
+    filtered_df = df[df.iloc[:, 0] == selected_class]
+    total_score = filtered_df.iloc[:, 2].sum()
+    average_score = filtered_df.iloc[:, 2].mean()
+    result = f"Tổng điểm lớp {selected_class}: {total_score}\nĐiểm trung bình lớp {selected_class}: {average_score:.2f}"
+
+  result_label.config(text=result)
+
+
+# Main GUI application
+def main():
+  global class_filter, df, result_label, score_input
+  df = None
+
+  root = Tk()
+  root.title("Giao diện quản lý điểm sinh viên")
+  root.geometry("500x700")
+
+  # Title
+  Label(root, text="Quản lý và hiển thị dữ liệu điểm sinh viên", font=("Arial", 16)).pack(pady=10)
+
+  # Data Loading
+  Button(root, text="Tải Dữ Liệu", command=load_data, width=20).pack(pady=5)
+
+  # Filter by Class
+  filter_frame = Frame(root)
+  filter_frame.pack(pady=10, fill="x")
+
+  Label(filter_frame, text="Lọc theo lớp:", font=("Arial", 12)).pack(side="left", padx=10)
+  class_filter = ttk.Combobox(filter_frame, state="readonly", width=30)
+  class_filter.pack(side="left", padx=10)
+
+  # Input Score
+  score_frame = Frame(root)
+  score_frame.pack(pady=10, fill="x")
+
+  Label(score_frame, text="Nhập số điểm:", font=("Arial", 12)).pack(side="left", padx=10)
+  score_input = Entry(score_frame, width=10)
+  score_input.pack(side="left", padx=10)
+
+  Button(score_frame, text="Tìm Sinh Viên", command=find_students_by_score, width=15).pack(side="left", padx=10)
+
+  # Buttons for Actions
+  Button(root, text="Hiển thị Dữ Liệu", command=plot_data, width=20).pack(pady=5)
+  Button(root, text="Tính Tổng Sinh Viên", command=calculate_totals, width=20).pack(pady=5)
+  Button(root, text="Tìm Sinh Viên Có Điểm Cao Nhất", command=find_top_student, width=25).pack(pady=5)
+  Button(root, text="Điểm Cao Nhất Mỗi Lớp", command=find_highest_scores_per_class, width=25).pack(pady=5)
+
+  # New button to calculate total score and average score
+  Button(root, text="Tính Tổng và Điểm Trung Bình", command=calculate_total_and_average, width=25).pack(pady=5)
+
+  # Result Display
+  result_label = Label(root, text="", font=("Arial", 12), justify="left", anchor="w", bg="white", wraplength=480)
+  result_label.pack(pady=10, padx=10, fill="both", expand=True)
+
+  # Save Data Button
+  Button(root, text="Lưu Dữ Liệu Đã Lọc", command=save_filtered_data, width=20).pack(pady=10)
+
+  root.mainloop()
+
+
+if __name__ == "__main__":
+  main()
+
+
+
+Mã đề 4:(HUYEN LAM)
+img = cv2.imread('pic2.png')
+cv2.imshow('Original', img)
+# generating the kernels
+kernel_sharpen_1 = np.array([[-1,-1,-1], [-1,9,-1], [-1,-1,-1]])
+kernel_sharpen_2 = np.array([[1,1,1], [1,-7,1], [1,1,1]])
+kernel_sharpen_3 = np.array([[-1,-1,-1,-1,-1], [-1,2,2,2,-1], [-1,2,8,2,-1], [-1,2,2,2,-1], [-1,-1,-1,-1,-1]]) / 8.0
+# applying different kernels to the input image
+output_1 = cv2.filter2D(img, -1, kernel sharpen_1)
+output_2 = cv2.filter2D(img, -1, kernel sharpen_2)
+output_3 = cv2.filter2D(img, -1, kernel_sharpen_3)
+cv2.imshow('Sharpening', output_1)
+cv2.imshow('Excessive Sharpening', output_2)
+cv2.imshow('Edge Enhancement', output_3)
+cv2.waitKey(0)
+GIAI:
+import cv2
+import numpy as np
+from tkinter import Tk, Label, Button, filedialog, Scale, HORIZONTAL
+from tkinter.messagebox import showinfo
+from PIL import Image, ImageTk
+
+
+class XuLyAnhXQuang:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Xử Lý Ảnh X-Quang")
+        self.root.geometry("600x500")
+
+        self.img = None  # Ảnh gốc
+        self.processed_img = None  # Ảnh đã qua xử lý
+
+        # Tiêu đề
+        Label(root, text="Công Cụ Xử Lý Ảnh X-Quang", font=("Arial", 16)).pack(pady=10)
+
+        # Nút chọn ảnh
+        Button(root, text="Chọn Ảnh X-Quang", command=self.load_image, width=20).pack(pady=5)
+
+        # Hiển thị thanh điều chỉnh độ sắc nét
+        Label(root, text="Điều Chỉnh Độ Sắc Nét:").pack(pady=5)
+        self.kernel_slider = Scale(root, from_=1, to=20, orient=HORIZONTAL, length=300)
+        self.kernel_slider.set(9)  # Giá trị mặc định
+        self.kernel_slider.pack(pady=5)
+
+        # Nút áp dụng bộ lọc
+        Button(root, text="Áp Dụng Bộ Lọc", command=self.apply_filter, width=20).pack(pady=5)
+
+        # Nút hiển thị histogram
+        Button(root, text="Hiển Thị Biểu Đồ Histogram", command=self.show_histogram, width=30).pack(pady=5)
+
+        # Nút lưu ảnh
+        Button(root, text="Lưu Ảnh Đã Xử Lý", command=self.save_image, width=20).pack(pady=5)
+
+        # Khung hiển thị ảnh
+        self.image_label = Label(root)
+        self.image_label.pack(pady=10)
+
+    def load_image(self):
+        """Hàm chọn ảnh từ thư viện."""
+        filepath = filedialog.askopenfilename(filetypes=[("Image files", "*.png;*.jpg;*.jpeg")])
+        if filepath:
+            try:
+                self.img = cv2.imread(filepath)
+                self.display_image(self.img)
+                showinfo("Thành Công", "Ảnh X-Quang đã được tải thành công!")
+            except Exception as e:
+                showinfo("Lỗi", f"Tải ảnh thất bại: {e}")
+
+    def apply_filter(self):
+        """Áp dụng bộ lọc làm sắc nét."""
+        if self.img is None:
+            showinfo("Lỗi", "Vui lòng chọn ảnh X-Quang trước!")
+            return
+
+        kernel_strength = self.kernel_slider.get()
+        kernel_sharpen = np.array([[-1, -1, -1], [-1, kernel_strength, -1], [-1, -1, -1]])
+        self.processed_img = cv2.filter2D(self.img, -1, kernel_sharpen)
+
+        self.display_image(self.processed_img)
+        showinfo("Thành Công", f"Đã áp dụng bộ lọc với độ sắc nét {kernel_strength}!")
+
+    def display_image(self, image):
+        """Hiển thị ảnh trên giao diện."""
+        rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        pil_image = Image.fromarray(rgb_image)
+        tk_image = ImageTk.PhotoImage(pil_image)
+        self.image_label.config(image=tk_image)
+        self.image_label.image = tk_image
+
+    def show_histogram(self):
+        """Hiển thị histogram của ảnh."""
+        if self.img is None:
+            showinfo("Lỗi", "Vui lòng chọn ảnh X-Quang trước!")
+            return
+
+        gray_img = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
+        cv2.imshow("Biểu Đồ Histogram", gray_img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
+    def save_image(self):
+        """Lưu ảnh đã xử lý."""
+        if self.processed_img is None:
+            showinfo("Lỗi", "Vui lòng áp dụng bộ lọc trước!")
+            return
+
+        save_path = filedialog.asksaveasfilename(defaultextension=".png", filetypes=[("Image files", "*.png;*.jpg;*.jpeg")])
+        if save_path:
+            try:
+                cv2.imwrite(save_path, self.processed_img)
+                showinfo("Thành Công", "Ảnh đã được lưu thành công!")
+            except Exception as e:
+                showinfo("Lỗi", f"Lưu ảnh thất bại: {e}")
+
+
+if __name__ == "__main__":
+    root = Tk()
+    app = XuLyAnhXQuang(root)
+    root.mainloop()
+
+
+Mã đề 5:
+img = cv2.imread('picl.png',cv2.IMREAD_GRAYSCALE)
+half = cv2.resize(img, (0, 0), fx = 0.1, fy = 0.1)
+bigger = cv2.resize(img, (1050, 1610))
+stretch_near = cv2.resize(img, (780, 540), interpolation = cv2.INTER_LINEAR)
+Titles = ["Original", "Half", "Bigger", "Interpolation Nearest"]
+images = [img, half, bigger, stretch_near]
+count = 4
+for i in range (count):
+    plt.subplot(2, 2, i+1)
+    plt.title(Titles[i])
+    plt.imshow(images[i])
+plt.show()
+
+GIAI:
+import cv2
+import numpy as np
+from tkinter import Tk, Label, Button, filedialog, simpledialog
+from tkinter.messagebox import showinfo
+import matplotlib.pyplot as plt
+
+
+# Function to load and display the original image
+def load_image():
+  global img
+  filepath = filedialog.askopenfilename(filetypes=[("Image files", "*.png;*.jpg;*.jpeg")])
+  try:
+    if filepath:
+      img = cv2.imread(filepath, cv2.IMREAD_GRAYSCALE)
+    else:
+      img = cv2.imread('picl.png', cv2.IMREAD_GRAYSCALE)
+
+    if img is not None:
+      cv2.imshow("Original Image", img)
+      showinfo("Success", "Image loaded successfully!")
+    else:
+      showinfo("Error", "Failed to load image. Ensure the file exists and is a valid image.")
+  except Exception as e:
+    showinfo("Error", f"Failed to load image: {e}")
+
+
+# Function to resize image and display different sizes
+def resize_and_display():
+  if img is None:
+    showinfo("Error", "Please load an image first!")
+    return
+
+  # Resizing the image
+  half = cv2.resize(img, (0, 0), fx=0.1, fy=0.1)
+  bigger = cv2.resize(img, (1050, 1610))
+  stretch_near = cv2.resize(img, (780, 540), interpolation=cv2.INTER_LINEAR)
+
+  # Displaying the images using Matplotlib
+  Titles = ["Original", "Half", "Bigger", "Interpolation Nearest"]
+  Images = [img, half, bigger, stretch_near]
+
+  for i in range(len(Images)):
+    plt.subplot(2, 2, i + 1)
+    plt.title(Titles[i])
+    plt.imshow(Images[i], cmap='gray')
+
+  plt.show()
+
+
+# Function to save resized images
+def save_resized_image():
+  if img is None:
+    showinfo("Error", "Please load an image first!")
+    return
+
+  save_path = filedialog.asksaveasfilename(defaultextension=".png", filetypes=[("Image files", "*.png;*.jpg;*.jpeg")])
+  if save_path:
+    try:
+      # Resize the image to half-size for saving as an example
+      half = cv2.resize(img, (0, 0), fx=0.1, fy=0.1)
+      cv2.imwrite(save_path, half)
+      showinfo("Success", "Resized image saved successfully!")
+    except Exception as e:
+      showinfo("Error", f"Failed to save resized image: {e}")
+
+
+# Function to apply negative effect
+def apply_negative():
+  if img is None:
+    showinfo("Error", "Please load an image first!")
+    return
+
+  negative_img = 255 - img
+  cv2.imshow("Negative Image", negative_img)
+
+
+# Function to convert to binary
+def apply_binary():
+  if img is None:
+    showinfo("Error", "Please load an image first!")
+    return
+
+  _, binary_img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
+  cv2.imshow("Binary Image", binary_img)
+
+
+# Function to rotate the image
+def rotate_image():
+  if img is None:
+    showinfo("Error", "Please load an image first!")
+    return
+
+  angle = simpledialog.askinteger("Input", "Enter rotation angle (degrees):", minvalue=0, maxvalue=360)
+  if angle is not None:
+    rows, cols = img.shape
+    M = cv2.getRotationMatrix2D((cols / 2, rows / 2), angle, 1)
+    rotated_img = cv2.warpAffine(img, M, (cols, rows))
+    cv2.imshow("Rotated Image", rotated_img)
+
+
+# Main GUI application
+def main():
+  global img
+  img = None
+
+  root = Tk()
+  root.title("Image Resizing GUI")
+  root.geometry("400x400")
+
+  Label(root, text="Image Resizing Tool", font=("Arial", 16)).pack(pady=10)
+
+  Button(root, text="Load Image", command=load_image, width=20).pack(pady=5)
+  Button(root, text="Resize and Display", command=resize_and_display, width=20).pack(pady=5)
+  Button(root, text="Save Resized Image", command=save_resized_image, width=20).pack(pady=5)
+  Button(root, text="Apply Negative", command=apply_negative, width=20).pack(pady=5)
+  Button(root, text="Convert to Binary", command=apply_binary, width=20).pack(pady=5)
+  Button(root, text="Rotate Image", command=rotate_image, width=20).pack(pady=5)
+
+  root.mainloop()
+
+
+if __name__ == "__main__":
+  main()
+
+
+Mã đề 6:
+arr = np.array([[1, 5, 6], [4, 7, 2], [3, 1, 9]])
+print ("Largest element is:", arr.max())
+print ("Row-wise maximum elements:", arr.max(axis 1))
+print ("Column-wise minimum elements:", arr.min(axis = 0))
+print ("Sum of all array elements:", arr.sum())
+print ("Cumulative sum along each row:\n", arr.cumsum(axis = 1))
+
+GIAI:
+import numpy as np
+import tkinter as tk
+from tkinter import ttk, messagebox
+
+# Hàm xử lý dữ liệu từ ô nhập
+def get_array():
+    try:
+        input_text = input_field.get("1.0", tk.END).strip()
+        rows = [list(map(int, row.split())) for row in input_text.splitlines()]
+        return np.array(rows)
+    except Exception as e:
+        messagebox.showerror("Error", f"Invalid input: {e}")
+        return None
+
+# Các hàm thực hiện từng chức năng
+def largest_element():
+    arr = get_array()
+    if arr is not None:
+        result = f"Largest element is: {arr.max()}"
+        output_field.delete("1.0", tk.END)
+        output_field.insert(tk.END, result)
+
+def row_wise_max():
+    arr = get_array()
+    if arr is not None:
+        result = f"Row-wise maximum elements: {arr.max(axis=1)}"
+        output_field.delete("1.0", tk.END)
+        output_field.insert(tk.END, result)
+
+def column_wise_min():
+    arr = get_array()
+    if arr is not None:
+        result = f"Column-wise minimum elements: {arr.min(axis=0)}"
+        output_field.delete("1.0", tk.END)
+        output_field.insert(tk.END, result)
+
+def total_sum():
+    arr = get_array()
+    if arr is not None:
+        result = f"Sum of all array elements: {arr.sum()}"
+        output_field.delete("1.0", tk.END)
+        output_field.insert(tk.END, result)
+
+def cumulative_sum():
+    arr = get_array()
+    if arr is not None:
+        result = f"Cumulative sum along each row:\n{arr.cumsum(axis=1)}"
+        output_field.delete("1.0", tk.END)
+        output_field.insert(tk.END, result)
+
+def column_range():
+    arr = get_array()
+    if arr is not None:
+        col_max = arr.max(axis=0)
+        col_min = arr.min(axis=0)
+        col_range = col_max - col_min
+        result = f"Column-wise range (max - min): {col_range}"
+        output_field.delete("1.0", tk.END)
+        output_field.insert(tk.END, result)
+
+def largest_position():
+    arr = get_array()
+    if arr is not None:
+        largest_value = arr.max()
+        largest_position = np.unravel_index(np.argmax(arr), arr.shape)
+        result = f"Largest value: {largest_value}\nPosition (row, column): {largest_position}"
+        output_field.delete("1.0", tk.END)
+        output_field.insert(tk.END, result)
+
+def normalize_array():
+    arr = get_array()
+    if arr is not None:
+        normalized = (arr - arr.min()) / (arr.max() - arr.min())
+        result = f"Normalized Array:\n{normalized}"
+        output_field.delete("1.0", tk.END)
+        output_field.insert(tk.END, result)
+
+# Tạo giao diện Tkinter
+root = tk.Tk()
+root.title("Array Operations")
+
+# Nhãn và ô nhập dữ liệu
+ttk.Label(root, text="Enter 2D Array (rows separated by new lines, values separated by spaces):").pack(pady=5)
+input_field = tk.Text(root, height=5, width=40)
+input_field.pack(pady=5)
+
+# Các nút thực hiện chức năng
+button_frame = ttk.Frame(root)
+button_frame.pack(pady=10)
+
+ttk.Button(button_frame, text="Largest Element", command=largest_element).grid(row=0, column=0, padx=5, pady=5)
+ttk.Button(button_frame, text="Row-wise Max", command=row_wise_max).grid(row=0, column=1, padx=5, pady=5)
+ttk.Button(button_frame, text="Column-wise Min", command=column_wise_min).grid(row=0, column=2, padx=5, pady=5)
+ttk.Button(button_frame, text="Total Sum", command=total_sum).grid(row=1, column=0, padx=5, pady=5)
+ttk.Button(button_frame, text="Cumulative Sum", command=cumulative_sum).grid(row=1, column=1, padx=5, pady=5)
+ttk.Button(button_frame, text="Column Range", command=column_range).grid(row=1, column=2, padx=5, pady=5)
+ttk.Button(button_frame, text="Largest Position", command=largest_position).grid(row=2, column=0, padx=5, pady=5)
+ttk.Button(button_frame, text="Normalize Array", command=normalize_array).grid(row=2, column=1, padx=5, pady=5)
+
+# Nhãn và ô hiển thị kết quả
+ttk.Label(root, text="Results:").pack(pady=5)
+output_field = tk.Text(root, height=15, width=60, state=tk.NORMAL)
+output_field.pack(pady=5)
+
+# Chạy ứng dụng
+root.mainloop()
+
+
+Mã đề 7:
+a = np.array([[1, 2], [3, 4]])
+b = np.array([[4, 3], [2. 1]])
+print ("Array aum:\n", a+b)
+print ("Array multiplication:\n", a*b)
+print ("Matrix multiplication:\n", a.dot(b))
+
+GIAI:
+import numpy as np
+from tkinter import Tk, Label, Button, Text, END
+from tkinter.messagebox import showinfo
+
+
+# Function to get matrices from user input
+def get_matrices():
+    try:
+        matrix_a_input = matrix_a_entry.get("1.0", END).strip()
+        matrix_b_input = matrix_b_entry.get("1.0", END).strip()
+        matrix_a = np.array(eval(matrix_a_input))
+        matrix_b = np.array(eval(matrix_b_input))
+        return matrix_a, matrix_b
+    except Exception as e:
+        showinfo("Error", f"Invalid input: {e}")
+        return None, None
+
+
+# Function to clear the result text box
+def clear_results():
+    result_text.delete("1.0", END)
+
+
+# Individual functions for each operation
+def calculate_sum():
+    clear_results()  # Clear old results
+    matrix_a, matrix_b = get_matrices()
+    if matrix_a is not None and matrix_b is not None:
+        try:
+            result = matrix_a + matrix_b
+            result_text.insert(END, f"Matrix A + Matrix B:\n{result}\n")
+        except Exception as e:
+            showinfo("Error", f"Cannot calculate sum: {e}")
+
+
+def calculate_elementwise_product():
+    clear_results()  # Clear old results
+    matrix_a, matrix_b = get_matrices()
+    if matrix_a is not None and matrix_b is not None:
+        try:
+            result = matrix_a * matrix_b
+            result_text.insert(END, f"Elementwise Multiplication:\n{result}\n")
+        except Exception as e:
+            showinfo("Error", f"Cannot calculate elementwise product: {e}")
+
+
+def calculate_matrix_product():
+    clear_results()  # Clear old results
+    matrix_a, matrix_b = get_matrices()
+    if matrix_a is not None and matrix_b is not None:
+        try:
+            result = np.dot(matrix_a, matrix_b)
+            result_text.insert(END, f"Matrix Multiplication (Dot Product):\n{result}\n")
+        except Exception as e:
+            showinfo("Error", f"Cannot calculate dot product: {e}")
+
+
+def calculate_determinant():
+    clear_results()  # Clear old results
+    matrix_a, _ = get_matrices()
+    if matrix_a is not None:
+        try:
+            result = np.linalg.det(matrix_a)
+            result_text.insert(END, f"Determinant of Matrix A:\n{result:.2f}\n")
+        except Exception as e:
+            showinfo("Error", f"Cannot calculate determinant of A: {e}")
+
+
+def calculate_inverse():
+    clear_results()  # Clear old results
+    matrix_a, _ = get_matrices()
+    if matrix_a is not None:
+        try:
+            result = np.linalg.inv(matrix_a)
+            result_text.insert(END, f"Inverse of Matrix A:\n{result}\n")
+        except Exception as e:
+            showinfo("Error", f"Cannot calculate inverse of A: {e}")
+
+
+def calculate_transpose():
+    clear_results()  # Clear old results
+    matrix_a, matrix_b = get_matrices()
+    if matrix_a is not None and matrix_b is not None:
+        result_text.insert(END, f"Transpose of Matrix A:\n{matrix_a.T}\n")
+        result_text.insert(END, f"Transpose of Matrix B:\n{matrix_b.T}\n")
+
+
+# Main GUI application
+def main():
+    global matrix_a_entry, matrix_b_entry, result_text
+
+    root = Tk()
+    root.title("Enhanced Matrix Operations GUI")
+    root.geometry("700x700")
+
+    Label(root, text="Enter Matrix A (e.g., [[1,2],[3,4]]):", font=("Arial", 12)).pack(pady=5)
+    matrix_a_entry = Text(root, height=5, width=60)
+    matrix_a_entry.pack(pady=5)
+
+    Label(root, text="Enter Matrix B (e.g., [[4,3],[2,1]]):", font=("Arial", 12)).pack(pady=5)
+    matrix_b_entry = Text(root, height=5, width=60)
+    matrix_b_entry.pack(pady=5)
+
+    Button(root, text="Calculate Sum", command=calculate_sum, width=20).pack(pady=5)
+    Button(root, text="Elementwise Multiplication", command=calculate_elementwise_product, width=25).pack(pady=5)
+    Button(root, text="Matrix Multiplication", command=calculate_matrix_product, width=25).pack(pady=5)
+    Button(root, text="Calculate Determinant (Matrix A)", command=calculate_determinant, width=30).pack(pady=5)
+    Button(root, text="Calculate Inverse (Matrix A)", command=calculate_inverse, width=30).pack(pady=5)
+    Button(root, text="Calculate Transpose", command=calculate_transpose, width=20).pack(pady=5)
+
+    Button(root, text="Clear Results", command=clear_results, width=20).pack(pady=10)
+
+    Label(root, text="Results:", font=("Arial", 12)).pack(pady=5)
+    result_text = Text(root, height=15, width=60)
+    result_text.pack(pady=5)
+
+    root.mainloop()
+
+
+if __name__ == "__main__":
+    main()
+
+
+Mã đề 8:
+x = Symbol('x')
+ans1 = diff(sin(x)*exp(x), x)
+print("derivative of sin(x)*e^x: ", ans1)
+ans2 = integrate(exp(x)*sin(x) + exp(x)*cos(x), x)
+print("indefinite integration is:", ans2)
+ans3 = integrate (sin(x**2), (x, -oo, oo))
+print("definite integration is: ", ans3)
+ans4 = limit(sin(x)/x, x, 0)
+print("limit is: ", ans4)
+ans5 = solve(x**2 - 2, x)
+print("roots are: ", ans5)
+
+GIAI:
+from sympy import Symbol, diff, integrate, limit, solve, oo, sin, exp, cos
+import numpy as np
+import matplotlib.pyplot as plt
+from tkinter import Tk, Label, Button, Text, Entry, END, filedialog, OptionMenu, StringVar, Frame
+from tkinter.messagebox import showinfo
+
+# Danh sách biểu thức có sẵn
+expressions = [
+    "sin(x)*exp(x)",
+    "exp(x)*sin(x) + exp(x)*cos(x)",
+    "sin(x**2)"
+]
+
+# Function to process the derivative
+def dao_ham():
+    try:
+        expression = selected_expression.get()
+        x = Symbol('x')
+        dao_ham_result = diff(expression, x)
+        ket_qua_text.delete("1.0", END)
+        ket_qua_text.insert(END, f"Đạo hàm của {expression}: {dao_ham_result}\n")
+    except Exception as e:
+        showinfo("Lỗi", f"Lỗi tính đạo hàm: {e}")
+
+# Function to process the indefinite integral
+def nguyen_ham():
+    try:
+        expression = selected_expression.get()
+        x = Symbol('x')
+        nguyen_ham_result = integrate(expression, x)
+        ket_qua_text.delete("1.0", END)
+        ket_qua_text.insert(END, f"Nguyên hàm của {expression}: {nguyen_ham_result}\n")
+    except Exception as e:
+        showinfo("Lỗi", f"Lỗi tính nguyên hàm: {e}")
+
+# Function to process the definite integral
+def nguyen_ham_dinh():
+    try:
+        expression = selected_expression.get()
+        x = Symbol('x')
+        nguyen_ham_dinh_result = integrate(sin(x**2), (x, -oo, oo))
+        ket_qua_text.delete("1.0", END)
+        ket_qua_text.insert(END, f"Nguyên hàm xác định của sin(x^2) từ -∞ đến ∞: {nguyen_ham_dinh_result}\n")
+    except Exception as e:
+        showinfo("Lỗi", f"Lỗi tính nguyên hàm xác định: {e}")
+
+# Function to process the limit
+def gioi_han():
+    try:
+        expression = selected_expression.get()
+        x = Symbol('x')
+        gioi_han_result = limit(sin(x) / x, x, 0)
+        ket_qua_text.delete("1.0", END)
+        ket_qua_text.insert(END, f"Giới hạn của sin(x)/x khi x tiến đến 0: {gioi_han_result}\n")
+    except Exception as e:
+        showinfo("Lỗi", f"Lỗi tính giới hạn: {e}")
+
+# Function to process the roots
+def nghiem():
+    try:
+        x = Symbol('x')
+        nghiem_result = solve(x**2 - 2, x)
+        ket_qua_text.delete("1.0", END)
+        ket_qua_text.insert(END, f"Nghiệm của x^2 - 2: {nghiem_result}\n")
+    except Exception as e:
+        showinfo("Lỗi", f"Lỗi tìm nghiệm: {e}")
+
+# Function to plot the expression
+def ve_bieu_do():
+    try:
+        expression = selected_expression.get()
+        x = Symbol('x')
+        expr = eval(expression.replace('^', '**'))  # Thay '^' bằng '**' cho phép toán mũ
+
+        # Tạo dữ liệu để vẽ biểu đồ
+        x_vals = np.linspace(-10, 10, 400)
+        y_vals = [float(expr.subs(x, val)) for val in x_vals]
+
+        plt.plot(x_vals, y_vals, label=str(expression))
+        plt.title("Biểu đồ của Biểu thức")
+        plt.xlabel("x")
+        plt.ylabel("y")
+        plt.legend()
+        plt.grid()
+        plt.show()
+    except Exception as e:
+        showinfo("Lỗi", f"Không thể vẽ biểu đồ: {e}")
+
+# Function to evaluate the expression at a specific point
+def tinh_tai_diem():
+    try:
+        expression = selected_expression.get()
+        diem = float(so_diem_entry.get().strip())
+        x = Symbol('x')
+        expr = eval(expression.replace('^', '**'))  # Thay '^' bằng '**' cho phép toán mũ
+        gia_tri = float(expr.subs(x, diem))
+        showinfo("Kết quả tính toán", f"Giá trị của biểu thức tại x = {diem} là {gia_tri}")
+    except Exception as e:
+        showinfo("Lỗi", f"Không thể tính toán biểu thức: {e}")
+
+# Function to save results to a file
+def luu_ket_qua():
+    try:
+        filepath = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Tệp văn bản", "*.txt")])
+        if filepath:
+            with open(filepath, "w") as file:
+                file.write(ket_qua_text.get("1.0", END).strip())
+            showinfo("Thành công", "Kết quả đã được lưu thành công!")
+    except Exception as e:
+        showinfo("Lỗi", f"Không thể lưu kết quả: {e}")
+
+# Main GUI application
+def main():
+    global selected_expression, ket_qua_text, so_diem_entry
+
+    root = Tk()
+    root.title("Ứng dụng Tính Toán Đại Số")
+    root.geometry("800x700")
+
+    Label(root, text="Chọn một biểu thức toán học:", font=("Arial", 12)).pack(pady=5)
+
+    # Dropdown menu for selecting expressions
+    selected_expression = StringVar(root)
+    selected_expression.set(expressions[0])  # Default selection
+    expression_menu = OptionMenu(root, selected_expression, *expressions)
+    expression_menu.pack(pady=5)
+
+    # Tạo Frame để chứa các nút xử lý theo hàng ngang
+    button_frame = Frame(root)
+    button_frame.pack(pady=10)
+
+    # Các nút xử lý biểu thức theo hàng ngang
+    Button(button_frame, text="Đạo hàm", command=dao_ham, width=15).grid(row=0, column=0, padx=5)
+    Button(button_frame, text="Nguyên hàm", command=nguyen_ham, width=15).grid(row=0, column=1, padx=5)
+    Button(button_frame, text="Nguyên hàm xác định", command=nguyen_ham_dinh, width=20).grid(row=0, column=2, padx=5)
+    Button(button_frame, text="Giới hạn", command=gioi_han, width=15).grid(row=1, column=0, padx=5)
+    Button(button_frame, text="Nghiệm", command=nghiem, width=15).grid(row=1, column=1, padx=5)
+    Button(button_frame, text="Vẽ biểu đồ", command=ve_bieu_do, width=15).grid(row=1, column=2, padx=5)
+
+    Label(root, text="Tính giá trị tại một điểm x:", font=("Arial", 12)).pack(pady=5)
+    so_diem_entry = Entry(root, width=30)
+    so_diem_entry.pack(pady=5)
+    Button(root, text="Tính toán", command=tinh_tai_diem, width=20).pack(pady=10)
+
+    Button(root, text="Lưu kết quả", command=luu_ket_qua, width=20).pack(pady=10)
+
+    Label(root, text="Kết quả:", font=("Arial", 12)).pack(pady=5)
+
+    ket_qua_text = Text(root, height=20, width=80)
+    ket_qua_text.pack(pady=5)
+
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
+
+
+
+Mã đề 9:
+img = cv2.imread('input_shapes.png', cv2.IMREAD_GRAYSCALE)
+rows, cols = img.shape
+sobel_horizontal = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize = 5)
+sobel_vertical = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize = 5)
+cv2.imshow('Original', img)
+cv2.imshow('Sobel horizontal', sobel horizontal)
+cv2.imshow('Sobel vertical', sobel vertical)
+GIAI:
+import cv2
+import numpy as np
+from tkinter import Tk, Button, Label, filedialog, messagebox
+from PIL import Image, ImageTk
+
+
+# Hàm xử lý ảnh Sobel
+def apply_sobel():
+  global img, img_display
+  sobel_horizontal = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=5)
+  sobel_vertical = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=5)
+
+  # Chuyển đổi sang dạng ảnh có thể hiển thị trong Tkinter
+  sobel_horizontal = cv2.convertScaleAbs(sobel_horizontal)
+  sobel_vertical = cv2.convertScaleAbs(sobel_vertical)
+
+  # Hiển thị ảnh Sobel ngang
+  sobel_combined = cv2.hconcat([sobel_horizontal, sobel_vertical])
+  img_display = Image.fromarray(sobel_combined)
+  img_display = img_display.resize((1000, 500))  # Resize ảnh cho phù hợp
+  img_display = ImageTk.PhotoImage(img_display)
+  label.config(image=img_display)
+
+  messagebox.showinfo("Info", "Đã áp dụng bộ lọc Sobel!")
+
+
+# Hàm áp dụng bộ lọc Gaussian
+def apply_gaussian_blur():
+  global img, img_display
+  gaussian_blur = cv2.GaussianBlur(img, (15, 15), 0)
+  img_display = Image.fromarray(gaussian_blur)
+  img_display = img_display.resize((1000, 1000))
+  img_display = ImageTk.PhotoImage(img_display)
+  label.config(image=img_display)
+  messagebox.showinfo("Info", "Đã áp dụng bộ lọc Gaussian!")
+
+
+# Hàm điều chỉnh độ sáng ảnh
+def adjust_brightness(factor):
+  global img, img_display
+  brightness_img = cv2.convertScaleAbs(img, alpha=factor, beta=0)
+  img_display = Image.fromarray(brightness_img)
+  img_display = img_display.resize((1000, 1000))
+  img_display = ImageTk.PhotoImage(img_display)
+  label.config(image=img_display)
+  messagebox.showinfo("Info", "Đã điều chỉnh độ sáng ảnh!")
+
+
+# Hàm thay đổi độ tương phản ảnh
+def adjust_contrast(factor):
+  global img, img_display
+  contrast_img = cv2.convertScaleAbs(img, alpha=factor, beta=0)
+  img_display = Image.fromarray(contrast_img)
+  img_display = img_display.resize((1000, 1000))
+  img_display = ImageTk.PhotoImage(img_display)
+  label.config(image=img_display)
+  messagebox.showinfo("Info", "Đã điều chỉnh độ tương phản ảnh!")
+
+
+# Hàm áp dụng bộ lọc Canny
+def apply_canny():
+  global img, img_display
+  edges = cv2.Canny(img, 100, 200)  # Áp dụng Canny với các giá trị ngưỡng
+  img_display = Image.fromarray(edges)
+  img_display = img_display.resize((1000, 1000))
+  img_display = ImageTk.PhotoImage(img_display)
+  label.config(image=img_display)
+  messagebox.showinfo("Info", "Đã áp dụng bộ lọc Canny!")
+
+
+# Hàm chọn ảnh
+def load_image():
+  global img, img_display
+  file_path = filedialog.askopenfilename()
+  if file_path:
+    img = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
+    img_display = Image.fromarray(img)
+    img_display = img_display.resize((1000, 1000))
+    img_display = ImageTk.PhotoImage(img_display)
+    label.config(image=img_display)
+
+
+# Khởi tạo cửa sổ chính của giao diện
+root = Tk()
+root.title("Chương trình xử lý ảnh")
+
+# Thêm các nút chức năng vào giao diện
+load_button = Button(root, text="Tải ảnh", command=load_image)
+load_button.pack()
+
+sobel_button = Button(root, text="Áp dụng Sobel", command=apply_sobel)
+sobel_button.pack()
+
+gaussian_button = Button(root, text="Áp dụng bộ lọc Gaussian", command=apply_gaussian_blur)
+gaussian_button.pack()
+
+brightness_button = Button(root, text="Tăng độ sáng", command=lambda: adjust_brightness(1.5))
+brightness_button.pack()
+
+contrast_button = Button(root, text="Tăng độ tương phản", command=lambda: adjust_contrast(1.5))
+contrast_button.pack()
+
+canny_button = Button(root, text="Áp dụng Canny", command=apply_canny)
+canny_button.pack()
+
+# Hiển thị ảnh trong giao diện
+label = Label(root)
+label.pack()
+
+root.mainloop()
